@@ -8,14 +8,13 @@
 
     The path provided below has to start and end with a slash "/" in order for
     it to work correctly.
-
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
 
     This is a placeholder for base href that will be replaced by the value of
     the `--base-href` argument provided to `flutter build`.
   -->
-  <base href="/youssef-s-portfolio/">
+  <base href="/">
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -33,9 +32,7 @@
   <title>Youssef Omar | Flutter Developer</title>
   <link rel="manifest" href="manifest.json">
 
-  <!-- Firebase Manual Scripts (Compat mode) -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+  <link rel="manifest" href="manifest.json">
   <!-- <script>
     const firebaseConfig = {
       apiKey: "AIzaSyA0mxxj0sNcs25g1nvEq8fn-Ijrjvwi_2s",
@@ -48,9 +45,64 @@
     };
     firebase.initializeApp(firebaseConfig);
   </script> -->
+  <style>
+    body {
+      background-color: #0d1117;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      width: 100vw;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .loader {
+      border: 8px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 8px solid #3498db;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="loading" id="loading-indicator">
+    <div class="loader"></div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      var loadingIndicator = document.getElementById('loading-indicator');
+      if (loadingIndicator) {
+        loadingIndicator.style.opacity = '0';
+        setTimeout(function () {
+          loadingIndicator.remove();
+        }, 500);
+      }
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 
